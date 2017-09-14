@@ -27,6 +27,7 @@
 
 .box {
     border: 3px solid white;
+    box-shadow: 0px 0px 15px 2px white;
     width: 50px;
     height: 50px;
     margin: 5px;
@@ -35,4 +36,11 @@
 .eight {
     max-height: 200px;
     max-width: 1000px;
+}
+
+#wrapper {
+    padding-top: 100px;
+    width: 610px;
+    /*display:inline-block;*/
+    margin: 0 auto;
 }
