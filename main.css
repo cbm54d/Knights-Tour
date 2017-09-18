@@ -7,9 +7,12 @@
     transform: rotate(0deg);
     white-space:nowrap;
     display:inline-block;
-    bottom:0;
-    width:auto;
-    height:10px;
+    top: 0px;
+    width: auto;
+    height:100px;
+    float: left;
+    /*position: relative;*/
+    /*top: 0px;*/
 }
 
 .numBox {
@@ -39,9 +42,12 @@
     max-width: 1000px;
 }
 
+#grid {
+    float: left;
+}
+
 #wrapper {
     padding-top: 100px;
-    width: 610px;
-    /*display:inline-block;*/
+    width: 640px;
     margin: 0 auto;
 }

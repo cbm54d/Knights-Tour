@@ -9,6 +9,8 @@
 
 <script>
     
+var numSolved = 0;
+    
 function checkChoice(index){
     valid = true;
     switch(index){
@@ -208,7 +210,10 @@ function checkChoice(index){
             valid = false;
             break;   
     }
-    if(parseInt(document.getElementById("numBox").innerHTML) == 0 || box.style.background == "lightblue"){
+    /*if(parseInt(document.getElementById("numBox").innerHTML) == 0 || box.style.background == "lightblue"){
+        changeBoxes(index);
+    }*/
+    if(numSolved == 0 || box.style.background == "lightblue"){
         changeBoxes(index);
     }
 }
@@ -449,16 +454,18 @@ function changeBoxes(index) {
         }
         center = false;
     }
-    var moves = document.getElementById("numBox");
-    moves.innerHTML = (parseInt(moves.innerHTML) + 1).toString();
+    /*var moves = document.getElementById("numBox");
+    moves.innerHTML = (parseInt(moves.innerHTML) + 1).toString();*/
+    numSolved++;
 }
 
 function resetBoard(){
     var bc = document.body.style.background;
     for(c = 0; c < 64; c++){
         document.getElementById("box"+c.toString()).style.background = bc;
-        document.getElementById("sumBox").innerHTML = "0";
-        document.getElementById("numBox").innerHTML = "0";
+        /*document.getElementById("sumBox").innerHTML = "0";
+        document.getElementById("numBox").innerHTML = "0";*/
+        numSolved = 0;
     }
 }
     
@@ -466,8 +473,8 @@ function checkSolve(){
 
     var total = 0;
     var posMoves = 0;
-    var moves = document.getElementById("numBox");
-    var min = document.getElementById("moves");
+    /*var moves = document.getElementById("numBox");
+    var min = document.getElementById("moves");*/
     for(c = 0; c < 64; c++){
         if(document.body.style.background == "black"){
             if(document.getElementById("box"+c.toString()).style.background == "red"){
@@ -482,8 +489,9 @@ function checkSolve(){
             posMoves++;
         }
     }
-    document.getElementById("sumBox").innerHTML = total.toString();
-    if(total == 64){
+    /*document.getElementById("sumBox").innerHTML = total.toString();*/
+    numSolved = total;
+    if(numSolved == 64){
         if(document.body.style.background == "black"){
             document.getElementById("grid").style.background = "red";
             document.body.style.background = "red";
@@ -491,13 +499,7 @@ function checkSolve(){
             document.getElementById("grid").style.background = "black";
             document.body.style.background = "black";
         }
-        if(min.innerHTML == "0"){
-            document.getElementById("challenge").innerHTML = "If you can solve the entire thing in less than 40 moves, then I solute you...";
-        }
-        if((parseInt(moves.innerHTML) < parseInt(min.innerHTML)) || min.innerHTML == "0"){
-            min.innerHTML = (parseInt(moves.innerHTML));
-        }
-        moves.innerHTML = "0";
+        numSolved = 0;
     } else if(posMoves == 0){
         resetBoard();
     }
@@ -509,7 +511,7 @@ function checkSolve(){
 <body style="background:black;">
     
     <div id="wrapper">
-    <div id="grid" style="float:left;" onclick="checkSolve();">
+    <span id="grid" onclick="checkSolve();">
         <span class="eight">
             <canvas class="box" id="box0" onclick=";checkChoice(0)" style="background:black;"></canvas>
             <canvas class="box" id="box1"  onclick=";checkChoice(1)" style="background:black;"></canvas>
@@ -583,19 +585,20 @@ function checkSolve(){
             <canvas class="box" id="box62" onclick=";checkChoice(146)" style="background:black;"></canvas>
             <canvas class="box" id="box63"  onclick=";checkChoice(147)" style="background:black;"></canvas>
         </span>
-    </div>
+    </span>
     
-    <div class="vertical">
+    <span class="vertical">
         <span style="color:white;font-size:44px;">THE KNIGHT'S TOUR</span>
-    </div>
-    <span style="float:left;">
+    </span>
+        
+    <!--<span style="float:left;">
     <p id="numBox" class="numBox">
         0
     </p>
     <p id="sumBox" class="numBox">
         0
     </p>
-    </span>
+    </span>-->
     
     </div>
     
